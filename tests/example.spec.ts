@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.only('Check reset password text', async ({ page }) => {
+test('Check reset password text', async ({ page }) => {
   await page.goto('/resetPassword');
   await expect(page).toHaveTitle(/PX - Dashboard/);
   const text = await page.innerText("div.px-login-title");
