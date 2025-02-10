@@ -18,10 +18,23 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: always()
+      run: | 
+        npx playwright test
+        mkdir -p public
+        mv playwright-report/* public/
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+        branch: gh-pages
+        folder: public
+
+        
+    # - uses: actions/upload-artifact@v4
+    #   if: always()
+    #   with:
+    #     name: playwright-report
+    #     path: playwright-report/
+    #     retention-days: 30
+
+
